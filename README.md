@@ -26,3 +26,6 @@ proyecto educativo para aplicar arquitecturas basadas en microservicios
 8.) La fecha de entrega de las APIs, serían los días Vie-23-Mayo-2025 al Vie-20-Junio-2025; si algún grupo termina antes el trabajo final y lo quiere presentar (acordamos la fecha de sustentación), le doy bonificación por entrega adelantada.
  
 9.) Deben entregar el Manual Técnico con la documentación respectiva a la aplicación (adjunto envío un manual de ejemplo: "Computación Orientada a Servicios_EJEMPLO_Manual Técnico_APIS_(Nombre Aplicación).docx").
+
+# Definiciones 
+- (Definicion de la api)[./API_DEFINITION.md]
