@@ -1,5 +1,10 @@
 # proyecto-soa
-proyecto educativo para aplicar arquitecturas basadas en microservicios
+
+## Nombre del Proyecto:
+EcoChatarrería - Plataforma de Venta y Recolección de Residuos Metálicos
+
+##  Contexto de Funcionamiento:
+La aplicación facilitará la venta y recolección de chatarra mediante un sistema que conecte a los usuarios con chatarrerías cercanas. Los usuarios podrán buscar lugares donde vender sus residuos y las chatarrerías podrán gestionar su inventario y solicitar recolectores cuando sea necesario.
 
 # Condiciones
  
