@@ -28,4 +28,4 @@ proyecto educativo para aplicar arquitecturas basadas en microservicios
 9.) Deben entregar el Manual Técnico con la documentación respectiva a la aplicación (adjunto envío un manual de ejemplo: "Computación Orientada a Servicios_EJEMPLO_Manual Técnico_APIS_(Nombre Aplicación).docx").
 
 # Definiciones 
-- [Definición de la API](./API_DEFINITION.md)
+- [Definición de la API](./API.md)
