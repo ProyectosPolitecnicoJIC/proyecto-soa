@@ -1,4 +1,5 @@
 # Dominios:
+
 ## 1. Usuarios y Autenticación (Login, Clientes y Chatarrerías) [Incluye JWT]
 Gestiona a los clientes y las chatarrerías, incluyendo autenticación.
 
