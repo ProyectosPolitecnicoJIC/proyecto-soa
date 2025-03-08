@@ -1,5 +1,6 @@
 import Express from 'express';
 import { json } from 'express';
+import mainRouter from './mainRouter.js';
 
 const app = new Express();
 
@@ -10,14 +11,7 @@ app.use(json());
 
 
 
-
-
-app.get('/health', (req, res) => {
-  res.send({
-    "server_status": "running",
-    "code": 200
-  });
-});
+app.use('/api/v1', mainRouter);
 
 
 app.listen(3000, () => {

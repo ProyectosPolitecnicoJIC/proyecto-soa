@@ -72,3 +72,4 @@ La aplicación facilitará la venta y recolección de chatarra mediante un siste
 
 # Definiciones 
 - [Definición de la API](./API.md)
+- [Definición de la Diseño de la Solución](./SOLUTION_DESIGN.md)
