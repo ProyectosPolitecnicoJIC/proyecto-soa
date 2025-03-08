@@ -1,8 +1,0 @@
-CREATE TABLE users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_email CHAR VARYING(200) NOT NULL UNIQUE,
-    user_password TEXT NOT NULL,
-    user_role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
-    user_created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    user_updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
