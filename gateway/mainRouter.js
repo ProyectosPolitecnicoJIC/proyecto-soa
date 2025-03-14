@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+
 const mainRouter = Router();
 
 mainRouter.get('/health', (req, res) => {
@@ -14,6 +15,9 @@ mainRouter.get('/health', (req, res) => {
 /* Auth router */
 import authRouter from './auth/controller/authRouter.js';
 mainRouter.use('/auth', authRouter);
+
+
+// aqui se hara el routing a los diferentes microservicios
 
 
 
