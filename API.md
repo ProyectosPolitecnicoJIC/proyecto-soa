@@ -1,18 +1,24 @@
 # Dominios:
 
-## 1. Usuarios y Autenticación (Login, Clientes y Chatarrerías) [Incluye JWT]
-Gestiona a los clientes y las chatarrerías, incluyendo autenticación.
+## 1. Autenticación 
+Gestiona el registro y autenticación de usuarios.
 
 ### Endpoints:
 
 - POST /auth/register → Registrar usuario (cliente o chatarrería).
 - POST /auth/login → Iniciar sesión y obtener token JWT.
+
+## 2. Usuarios
+Gestiona la información de los usuarios.
+
+### Endpoints:
+
 - GET /usuarios/{id} → Obtener perfil de usuario.
 - PUT /usuarios/{id} → Actualizar perfil.
 - DELETE /usuarios/{id} → Eliminar usuario.
 📌 Usuarios pueden ser clientes (quienes venden chatarra) o chatarrerías (compradores).
 
-## 2. Chatarrerías y Materiales (Ubicaciones y Tipos de Residuos Aceptados)
+## 3. Chatarrerías y Materiales (Ubicaciones y Tipos de Residuos Aceptados)
 Gestiona chatarrerías y los tipos de residuos que aceptan.
 
 ### Endpoints:
@@ -26,7 +32,7 @@ Gestiona chatarrerías y los tipos de residuos que aceptan.
 - DELETE /chatarrerias/{id}/materiales/{idMaterial} → Eliminar residuo aceptado.
 📌 Cada chatarrería define qué residuos compra (ejemplo: cobre, aluminio, cartón, plástico reciclable).
 
-## 3. Transacciones (Órdenes de Venta de Chatarra)
+## 4. Transacciones (Órdenes de Venta de Chatarra)
 Gestiona las ventas de chatarra entre clientes y chatarrerías.
 
 ### Endpoints:
@@ -38,7 +44,7 @@ Gestiona las ventas de chatarra entre clientes y chatarrerías.
 - DELETE /ordenes/{id} → Cancelar venta.
 📌 Cada venta incluye: usuario vendedor, chatarrería compradora, tipo y cantidad de material vendido, precio total.
 
-## 4. Recolección (Servicio de Recolectores de Chatarra) 
+## 5. Recolección (Servicio de Recolectores de Chatarra) 
 Gestión de recolectores que ofrecen servicio a domicilio para recoger chatarra.
 
 ### Endpoints:
@@ -50,7 +56,8 @@ Gestión de recolectores que ofrecen servicio a domicilio para recoger chatarra.
 📌 Si un usuario no puede llevar su chatarra a la chatarrería, puede solicitar un recolector.
 
 # Resumen
-✅ Usuarios y Autenticación (Login incluido, Clientes y Chatarrerías)
+✅ Autenticación (Registro y Login)
+✅ Usuarios (Perfil y Gestión)
 ✅ Chatarrerías y Materiales (Ubicaciones y Tipos de Residuos Aceptados)
 ✅ Transacciones (Órdenes de Venta de Chatarra)
 ✅ Recolección (útil para servicio a domicilio)
