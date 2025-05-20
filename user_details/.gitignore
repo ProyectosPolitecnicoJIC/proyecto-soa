@@ -1,0 +1,31 @@
+# Python Bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entorno virtual
+venv/
+.env
+*.env
+
+# Configuración de IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de logs y temporales
+*.log
+*.bak
+*.tmp
+.DS_Store
+
+# Dependencias
+pip-log.txt
+pip-wheel-metadata/
+
+# Archivos de compilación
+build/
+dist/
+*.egg-info/
