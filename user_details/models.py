@@ -13,4 +13,3 @@ class User_Details(Base):
     email = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now)
-
