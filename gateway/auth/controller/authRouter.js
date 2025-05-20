@@ -13,7 +13,11 @@ authRouter.post("/login", async (req, res) => {
     try {
         const result = await authRepo.login(email, password);
         const token = JwtService.generateToken({ auth_id: result.auth.auth_id });
-        res.cookie("token", token, { httpOnly: true }).json(result).status(200);
+        const responseDTO = {
+            token: token,
+            user_id: result.auth.auth_id,
+        }
+        res.cookie("token", token, { httpOnly: true }).json(responseDTO).status(200);
     } catch (error) {
         res.status(401).json({ message: error.message });
     }
