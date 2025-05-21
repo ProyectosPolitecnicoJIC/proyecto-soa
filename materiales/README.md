@@ -8,5 +8,6 @@ apagar: deactivate
 generar archivo de dependencias: pip freeze > requirements.txt
 instalar archivo de dependencias: pip install -r requirements.txt
 
-correr servidor: uvicorn main:app --reload
+
 correr servidor en puerto: uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+python -m uvicorn main:app --port 8001 --reload

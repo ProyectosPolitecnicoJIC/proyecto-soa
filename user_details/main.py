@@ -3,11 +3,27 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine
 import models
 import schemas
-
-
+from typing import List
+from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(
+    title="User Details Service",
+    description="API para el servicio de detalles de usuario",
+    version="1.0.0"
+)
+
+
+# Configuración CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 
 def get_db():
     db = SessionLocal()
@@ -23,14 +39,22 @@ def read_users(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
-@app.post("/users/{user_id}", response_model=schemas.UserDetails)
-def create_user(user_id: int, user: schemas.UserDetailsCreate, db: Session = Depends(get_db)):
+@app.get("/users", response_model=List[schemas.UserDetails])
+def read_users(db: Session = Depends(get_db)):
+    users = db.query(models.User_Details).all()
+    return users
+
+@app.post("/users", response_model=schemas.UserDetails)
+def create_user(user: schemas.UserDetailsCreate, db: Session = Depends(get_db)):
+    print(user)
     db_user = models.User_Details(
-        id=user_id,
+        id=user.id,
         nombre_chatarreria=user.nombre_chatarreria,
         direccion=user.direccion,
         telefono=user.telefono,
-        email=user.email
+        email=user.email,
+        updated_at=datetime.now(),
+        created_at=datetime.now()
     )
     db.add(db_user)
     db.commit()
