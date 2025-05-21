@@ -85,7 +85,57 @@ mainRouter.delete("/user-details/:user_id", authenticateToken, async (req, res) 
 
 
 
+// ORDERS
 
+mainRouter.get("/orders/:order_id", authenticateToken, async (req, res) => {
+    try {
+        const response = await axios.get(`http://127.0.0.1:8002/orders/${req.params.order_id}`);
+        res.json(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).json({ message: error.message });
+    }
+});
+
+mainRouter.get("/orders", authenticateToken, async (req, res) => {
+    
+    try {
+        const response = await axios.get(`http://127.0.0.1:8002/orders`);
+        res.json(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).json({ message: error.message });
+    }
+});
+
+mainRouter.post("/orders", authenticateToken, async (req, res) => {
+    let token = req.headers.authorization?.split(' ')[1];
+    let payload = JSON.parse(atob(token.split('.')[1]));
+    let id = payload.auth_id;
+    req.body.id_usuario = id;
+    try {
+        const response = await axios.post(`http://127.0.0.1:8002/orders`, req.body);
+        res.json(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).json({ message: error.message });
+    }
+});
+
+mainRouter.put("/orders/:order_id", authenticateToken, async (req, res) => {
+    try {
+        const response = await axios.put(`http://127.0.0.1:8002/orders/${req.params.order_id}`, req.body);
+        res.json(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).json({ message: error.message });
+    }
+});
+
+mainRouter.delete("/orders/:order_id", authenticateToken, async (req, res) => {
+    try {
+        await axios.delete(`http://127.0.0.1:8002/orders/${req.params.order_id}`);
+        res.status(204).send();
+    } catch (error) {
+        res.status(error.response?.status || 500).json({ message: error.message });
+    }
+});
 
 
 
