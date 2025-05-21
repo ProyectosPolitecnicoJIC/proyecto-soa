@@ -1,20 +1,27 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
-class UserDetailsBase(BaseModel):
-    nombre_chatarreria: str
-    direccion: str
-    telefono: str
-    email: str
+class MaterialesBase(BaseModel):
+    nombre: str
+    descripcion: str
+    precio: float
+    cantidad: int
+    id_chatarreria: int
 
-class UserDetailsCreate(UserDetailsBase):
+class MaterialesCreate(MaterialesBase):
     pass
 
-class UserDetailsUpdate(UserDetailsBase):
+class MaterialesUpdate(MaterialesBase):
+    id: int
+    nombre: str
+    descripcion: str
+    precio: float
+    cantidad: int
+    id_chatarreria: int
     pass
 
-class UserDetails(UserDetailsBase):
+class Materiales(MaterialesBase):
     id: int
     created_at: datetime
     updated_at: datetime

@@ -2,10 +2,15 @@ import { Router } from "express";
 import { authRepository } from "../repository/authRepository.js";
 import { JwtService } from "../services/jwtTokenService.js";
 
+
 const authRouter = Router();
 
 const authRepo = new authRepository();
 const jwtService = new JwtService();
+
+
+
+
 
 authRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -21,8 +26,7 @@ authRouter.post("/login", async (req, res) => {
     } catch (error) {
         res.status(401).json({ message: error.message });
     }
-}
-);
+});
 
 authRouter.post("/register", async (req, res) => {
     const { email, password } = req.body;
@@ -33,9 +37,6 @@ authRouter.post("/register", async (req, res) => {
     } catch (error) {
         res.status(401).json({ message: error.message });
     }
-}
-);
-
-
+});
 
 export default authRouter;
