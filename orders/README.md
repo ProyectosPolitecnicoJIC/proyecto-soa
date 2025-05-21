@@ -1,4 +1,5 @@
 se va a utilizar un virtual env
+nombrar los virtual envs como v*
 
 comandos:
 crear: python -m venv nombre_del_env

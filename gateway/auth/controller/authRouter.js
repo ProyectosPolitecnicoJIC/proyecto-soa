@@ -39,4 +39,14 @@ authRouter.post("/register", async (req, res) => {
     }
 });
 
+authRouter.get("/validate", async (req, res) => {
+    const token = req.headers.authorization.split(" ")[1];
+    try {
+        JwtService.verifyToken(token);
+        res.json({ valid: true });
+    } catch (error) {
+        res.status(401).json({ valid: false, message: error.message });
+    }
+});
+
 export default authRouter;

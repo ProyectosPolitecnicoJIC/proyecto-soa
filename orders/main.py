@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine
@@ -34,7 +33,7 @@ def get_db():
         db.close()
 
 @app.get("/orders/{order_id}", response_model=schemas.Orden)
-def read_orders(order_id: int, db: Session = Depends(get_db)):
+def read_order(order_id: int, db: Session = Depends(get_db)):
     order = db.query(models.Orden).filter(models.Orden.id == order_id).first()
     if order is None:
         raise HTTPException(status_code=404, detail="Order not found")
@@ -47,12 +46,12 @@ def read_orders(db: Session = Depends(get_db)):
 
 @app.post("/orders", response_model=schemas.Orden)
 def create_order(order: schemas.OrdenCreate, db: Session = Depends(get_db)):
-    print(order)
     db_order = models.Orden(
-        id=order.id,
         id_usuario=order.id_usuario,
-        materiales=order.materiales,
-        created_at=datetime.now()
+        id_material=order.id_material,
+        cantidad=order.cantidad,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
     )
     db.add(db_order)
     db.commit()
@@ -65,13 +64,13 @@ def update_order(order_id: int, order: schemas.OrdenUpdate, db: Session = Depend
     if db_order is None:
         raise HTTPException(status_code=404, detail="Order not found")
     
-    for key, value in order.model_dump().items():
+    update_data = order.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
         setattr(db_order, key, value)
     
     db.commit()
     db.refresh(db_order)
     return db_order
-
 
 @app.delete("/orders/{order_id}")
 def delete_order(order_id: int, db: Session = Depends(get_db)):
@@ -80,3 +79,4 @@ def delete_order(order_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Order not found")
     db.delete(db_order)
     db.commit()
+    return {"message": "Order deleted successfully"}

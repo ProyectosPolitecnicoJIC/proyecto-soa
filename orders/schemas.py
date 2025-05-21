@@ -3,36 +3,35 @@ from datetime import datetime
 from typing import List, Optional
 
 
-# TODO: Organizar los esquemas de los modelos de la base de datos
-# Esquemas para OrdenMaterial
-class OrdenMaterialBase(BaseModel):
+class OrdenBase(BaseModel):
+    id_usuario: int
     id_material: int
     cantidad: int
 
-class OrdenMaterialCreate(OrdenMaterialBase):
+class OrdenCreate(OrdenBase):
     pass
 
-class OrdenMaterial(OrdenMaterialBase):
-    id: int
-    id_orden: int
-
-    class Config:
-        from_attributes = True
-
-# Esquemas para Orden
-class OrdenBase(BaseModel):
-    id_usuario: int
-
-class OrdenCreate(OrdenBase):
-    materiales: List[OrdenMaterialCreate]
-
-class OrdenUpdate(OrdenBase):
-    materiales: Optional[List[OrdenMaterialCreate]] = None
+class OrdenUpdate(BaseModel):
+    id_usuario: Optional[int] = None
+    id_material: Optional[int] = None
+    cantidad: Optional[int] = None
 
 class Orden(OrdenBase):
     id: int
     created_at: datetime
-    materiales: List[OrdenMaterial]
+    updated_at: datetime
 
     class Config:
         from_attributes = True
+
+class OrdenMaterial(BaseModel):
+    id: int 
+    id_orden: int
+    id_material: int
+    cantidad: int
+    created_at: datetime
+    updated_at: datetime
+
+class OrdenMaterialCreate(BaseModel):
+    id_material: int
+    cantidad: int
