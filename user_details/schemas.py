@@ -9,6 +9,7 @@ class UserDetailsBase(BaseModel):
     email: str
 
 class UserDetailsCreate(UserDetailsBase):
+    id: int
     pass
 
 class UserDetailsUpdate(UserDetailsBase):
@@ -18,6 +19,3 @@ class UserDetails(UserDetailsBase):
     id: int
     created_at: datetime
     updated_at: datetime
-
-    class Config:
-        from_attributes = True 
