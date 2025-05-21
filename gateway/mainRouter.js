@@ -139,7 +139,7 @@ mainRouter.put("/materiales/:material_id", authenticateToken, async (req, res) =
     let payload = JSON.parse(atob(token.split('.')[1]));
     let auth_id = payload.auth_id;
     req.body.id_chatarreria = auth_id;
-    
+
     try {
         const response = await axios.put(`http://127.0.0.1:8001/materiales/${req.params.material_id}`, req.body);
         res.json(response.data);
