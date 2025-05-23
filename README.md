@@ -1,75 +1,216 @@
-# proyecto-soa
+# MANUAL TÉCNICO
 
-## Nombre del Proyecto:
-EcoChatarrería - Plataforma de Venta y Recolección de Residuos Metálicos
+## Información General
 
-##  Contexto de Funcionamiento:
-La aplicación facilitará la venta y recolección de chatarra mediante un sistema que conecte a los usuarios con chatarrerías cercanas. Los usuarios podrán buscar lugares donde vender sus residuos y las chatarrerías podrán gestionar su inventario y solicitar recolectores cuando sea necesario.
+**Geffry Alejandro Ospina Atehortua**  
 
-## Casos de uso
+**DOCENTE**  
+ANDRÉS FELIPE GONZÁLEZ OROZCO
 
-1. Registro y Autenticación de Usuarios
-    Descripción: Permite a los usuarios (vendedores, chatarrerías y recolectores) registrarse e iniciar sesión en la plataforma.
-    Actores: Usuario (vendedor, chatarrería, recolector), API de autenticación
-    Flujo Principal:
-        - El usuario ingresa sus datos en el formulario de registro.
-        - La API valida los datos y almacena la información en la base de datos.
-        - El usuario recibe un token JWT tras autenticarse.
-        - El usuario usa el token para acceder a otros servicios de la API.
+**MATERIA**  
+PROYECTO INTEGRADOR
 
+**INSTITUCIÓN**  
+POLITECNICO JAIME ISAZA CADAVID FACULTAD DE INGENIERÍA
 
-2. Publicación de Residuos Metálicos
-    Descripción: Permite que los usuarios (vendedores) publiquen los residuos metálicos que desean vender.
-    Actores: Vendedor, API de residuos
-    Flujo Principal:
-        - El usuario accede a la aplicación y selecciona "Publicar Residuo".
-        - Ingresa detalles del residuo (tipo, peso, ubicación, precio sugerido, fotos).
-        - La API almacena la información en la base de datos y la hace visible para las chatarrerías.
-        - Las chatarrerías pueden ver las publicaciones y hacer ofertas.
+**MEDELLÍN 2025-1**
 
-3. Gestión de Inventario de Chatarrerías
-    Descripción: Permite a las chatarrerías administrar su inventario de residuos adquiridos.
-    Actores: Chatarrería, API de inventario
-    Flujo Principal:
-        - La chatarrería visualiza los residuos adquiridos.
-        - Puede actualizar la cantidad disponible, eliminar registros o agregar nuevos residuos.
-        - La API actualiza la información en la base de datos.
+## Tabla de contenido
+1. [Presentación](#presentación)
+2. [Objetivo](#objetivo)
+3. [Procesos](#procesos)
+4. [Requisitos del sistema](#requisitos-del-sistema)
+5. [Herramientas utilizadas para el desarrollo](#herramientas-utilizadas-para-el-desarrollo)
+6. [Instalación de aplicaciones](#instalación-de-aplicaciones)
+7. [Modelo de clases](#modelo-de-clases)
+8. [Diagrama de casos de uso](#diagrama-de-casos-de-uso)
+9. [Diagrama entidad relación](#diagrama-entidad-relación)
+10. [Diccionario de datos](#diccionario-de-datos)
 
-4. Solicitud de Recolectores
-    Descripción: Permite a las chatarrerías solicitar recolectores para recoger residuos de los vendedores.
-    Actores: Chatarrería, Recolector, API de recolección
-    Flujo Principal:
-        - La chatarrería ingresa una solicitud con los detalles del residuo y la ubicación del vendedor.
-        - La API notifica a los recolectores cercanos.
-        - Un recolector acepta la solicitud.
-        - La API registra el estado de la solicitud hasta su finalización.
+## Presentación
+El sistema de gestión de chatarrerías es una plataforma web que permite la interacción entre usuarios (vendedores de chatarra) y chatarrerías (compradores). La plataforma facilita la gestión de transacciones de materiales reciclables, permitiendo a los usuarios registrar ventas, solicitar servicios de recolección y gestionar sus perfiles. Este manual técnico documenta la estructura del servicio web de la aplicación mediante una arquitectura de microservicios REST-FUL API.
 
-# Condiciones
- 
-1.  Para considerar que la API se desarrolló con base en las características de una Arquitectura SOA; debe contar con:
-    1. Un contexto de funcionamiento de la API, es decir, cuál es el tema o necesidad funcional que soluciona la API.
-    2. Los métodos CRUD de operación, es decir que mínimo deben desarrollar 4 APIs.
- 
-2. Debe contar con acceso (CRUD) a información almacenada en una Base de Datos que puede ser:
-    1. Relacional (RDS).
-    2. No Relacional.
-    3. Puede utilizar cualquier Motor o Gestor de Bases de Datos.
-    4. Puede ser local o estar alojada en cualquier nube.
- 
-3. Deben desarrollar un formulario, que permita la captura de la información a ser gestionada por las APIs.
- 
-4. La API, debe contar con autenticación por medio del uso de JWT.
- 
-5. Para poder probar el funcionamiento y consumo externo de las APIs, deben incluir el uso de POSTMAN (tengan en cuenta que algunas de las palabras del CRUD, cambian al trabajar con los métodos en Postman).
- 
-6. El trabajo lo deben desarrollar en los grupos, ya conformados.
- 
-7. Esta actividad tiene un valor del 25% y equivale al Parcial #2.
- 
-8. La fecha de entrega de las APIs, serían los días Vie-23-Mayo-2025 al Vie-20-Junio-2025; si algún grupo termina antes el trabajo final y lo quiere presentar (acordamos la fecha de sustentación), le doy bonificación por entrega adelantada.
- 
-9. Deben entregar el Manual Técnico con la documentación respectiva a la aplicación (adjunto envío un manual de ejemplo: "Computación Orientada a Servicios_EJEMPLO_Manual Técnico_APIS_(Nombre Aplicación).docx").
+## Objetivo
+Presentar la estructura del servicio web de la aplicación de gestión de chatarrerías, implementando el paradigma REST-FUL API a través de una arquitectura de microservicios, documentando todas las funcionalidades y consultas disponibles en la aplicación.
 
-# Definiciones 
-- [Definición de la API](./API.md)
-- [Definición de la Diseño de la Solución](./SOLUTION_DESIGN.md)
+## Procesos
+
+### Procesos de entrada:
+
+#### Aplicativo web (acceso desde computador, tablet o celular)
+- Ingreso a la aplicación mediante Login
+- Registro de usuarios (clientes o chatarrerías)
+- Gestión de perfiles de usuario
+- Gestión de contraseñas
+- Registro y gestión de chatarrerías
+- Registro y gestión de materiales aceptados
+- Gestión de órdenes de venta
+- Gestión de solicitudes de recolección
+
+#### Postman
+- Autenticación y registro de usuarios
+- Gestión de perfiles de usuario
+- Gestión de chatarrerías y materiales
+- Gestión de órdenes de venta
+- Gestión de solicitudes de recolección
+
+### Procesos de salida:
+
+#### Aplicativo web
+- Consulta de perfiles de usuario
+- Consulta de chatarrerías disponibles
+- Consulta de materiales aceptados
+- Consulta de órdenes de venta
+- Consulta de solicitudes de recolección
+
+#### Postman
+- Consulta de perfiles de usuario
+- Consulta de chatarrerías disponibles
+- Consulta de materiales aceptados
+- Consulta de órdenes de venta
+- Consulta de solicitudes de recolección
+
+## Requisitos del sistema
+
+### Requisitos de hardware:
+- Conexión a internet
+- Computador, tablet o celular
+
+### Requisitos de software:
+- Navegadores web modernos (Google Chrome, Firefox, Edge)
+- Node.js
+- MySQL
+- Visual Studio Code (recomendado)
+
+## Herramientas utilizadas para el desarrollo
+
+1. **Node.js** - Entorno de ejecución para JavaScript
+2. **Express.js** - Framework web para Node.js
+3. **MySQL** - Sistema de gestión de base de datos
+4. **JWT** - Gestión de autenticación
+5. **HTML5 y JavaScript** - Desarrollo frontend
+
+## Instalación de aplicaciones
+
+1. **Node.js**
+   - Descargar e instalar desde [nodejs.org](https://nodejs.org)
+   - Versión recomendada: LTS
+
+2. **Visual Studio Code**
+   - Descargar e instalar desde [code.visualstudio.com](https://code.visualstudio.com)
+
+3. **MySQL**
+   - Descargar e instalar desde [mysql.com](https://mysql.com)
+   - Instalar MySQL Workbench para gestión de base de datos
+
+## Modelo de clases
+
+La aplicación está estructurada en microservicios:
+
+1. **Microservicio de Autenticación**
+   - Gestión de registro y login de usuarios
+   - Manejo de tokens JWT
+
+2. **Microservicio de Usuarios**
+   - Gestión de perfiles de usuario
+   - Clasificación de usuarios (clientes/chatarrerías)
+
+3. **Microservicio de Chatarrerías**
+   - Gestión de información de chatarrerías
+   - Gestión de materiales aceptados
+
+4. **Microservicio de Transacciones**
+   - Gestión de órdenes de venta
+   - Gestión de solicitudes de recolección
+
+## Diagrama de casos de uso
+
+### Casos de uso principales:
+
+1. **Gestión de Usuarios**
+   - Actor: Usuario (Cliente/Chatarrería)
+   - Descripción: Registro, login y gestión de perfil de usuario
+
+2. **Gestión de Chatarrerías**
+   - Actor: Chatarrería
+   - Descripción: Registro y gestión de información de chatarrería
+
+3. **Gestión de Materiales**
+   - Actor: Chatarrería
+   - Descripción: Gestión de tipos de materiales aceptados
+
+4. **Gestión de Órdenes**
+   - Actor: Usuario/Chatarrería
+   - Descripción: Creación y gestión de órdenes de venta
+
+5. **Gestión de Recolección**
+   - Actor: Usuario
+   - Descripción: Solicitud y gestión de servicios de recolección
+
+## Diagrama entidad relación
+
+La base de datos está compuesta por las siguientes entidades principales:
+
+1. **Usuarios**
+   - Clientes
+   - Chatarrerías
+
+2. **Materiales**
+   - Tipos de materiales
+   - Precios
+
+3. **Órdenes**
+   - Detalles de venta
+   - Estados
+
+4. **Recolección**
+   - Solicitudes
+   - Estados
+
+## Diccionario de datos
+
+### Tabla: Usuarios
+- id: INT (PK)
+- nombre: VARCHAR(100)
+- email: VARCHAR(100)
+- password: VARCHAR(255)
+- tipo: ENUM('cliente', 'chatarreria')
+- created_at: TIMESTAMP
+- updated_at: TIMESTAMP
+
+### Tabla: Chatarrerias
+- id: INT (PK)
+- usuario_id: INT (FK)
+- nombre: VARCHAR(100)
+- direccion: VARCHAR(255)
+- telefono: VARCHAR(20)
+- created_at: TIMESTAMP
+- updated_at: TIMESTAMP
+
+### Tabla: Materiales
+- id: INT (PK)
+- nombre: VARCHAR(100)
+- descripcion: TEXT
+- precio_kg: DECIMAL(10,2)
+- created_at: TIMESTAMP
+- updated_at: TIMESTAMP
+
+### Tabla: Ordenes
+- id: INT (PK)
+- usuario_id: INT (FK)
+- chatarreria_id: INT (FK)
+- material_id: INT (FK)
+- cantidad: DECIMAL(10,2)
+- precio_total: DECIMAL(10,2)
+- estado: ENUM('pendiente', 'completada', 'cancelada')
+- created_at: TIMESTAMP
+- updated_at: TIMESTAMP
+
+### Tabla: Recoleccion
+- id: INT (PK)
+- usuario_id: INT (FK)
+- direccion: VARCHAR(255)
+- fecha_solicitud: DATETIME
+- estado: ENUM('pendiente', 'asignada', 'completada', 'cancelada')
+- created_at: TIMESTAMP
+- updated_at: TIMESTAMP
