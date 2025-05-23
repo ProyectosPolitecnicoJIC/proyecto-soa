@@ -6,11 +6,6 @@ import { JwtService } from "../services/jwtTokenService.js";
 const authRouter = Router();
 
 const authRepo = new authRepository();
-const jwtService = new JwtService();
-
-
-
-
 
 authRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;

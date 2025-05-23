@@ -112,8 +112,22 @@ mainRouter.post("/orders", authenticateToken, async (req, res) => {
     let id = payload.auth_id;
     req.body.id_usuario = id;
     try {
+        const materialCuantities = await axios.get(`http://127.0.0.1:8001/materiales/${req.params.material_id}`);
+        if (materialCuantities.data.cantidad < req.body.cantidad) {
+            return res.status(400).json({ message: "No hay suficiente material disponible" });
+        }
         const response = await axios.post(`http://127.0.0.1:8002/orders`, req.body);
         res.json(response.data);
+
+        // Actualizar la cantidad de material
+
+        const updatedMaterial = {
+            ...materialCuantities.data,
+            cantidad: materialCuantities.data.cantidad - req.body.cantidad
+        };
+
+        await axios.put(`http://127.0.0.1:8001/materiales/${req.params.material_id}`, updatedMaterial);
+        
     } catch (error) {
         res.status(error.response?.status || 500).json({ message: error.message });
     }

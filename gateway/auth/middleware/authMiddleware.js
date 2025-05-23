@@ -1,19 +1,20 @@
-import { JwtService } from "../services/jwtTokenService.js";
+import { JwtService } from '../services/jwtTokenService.js';
 
 // Middleware de autenticación
 const authenticateToken = async (req, res, next) => {
     let token;
-    console.log(req.headers);
+    console.log('authorization', req.headers.authorization);
     try {
+        console.log('authorization if', Boolean(req.headers.authorization));
         if (req.headers.authorization) {
             token = req.headers.authorization.split(' ')[1];
         }
     } catch (error) {
-        return res.status(401).json({ message: "Token no proporcionado" });
+        return res.status(401).json({ message: 'Token no proporcionado' });
     }
 
     if (!token) {
-        return res.status(401).json({ message: "Token no proporcionado" });
+        return res.status(401).json({ message: 'Token no proporcionado' });
     }
 
     try {
@@ -21,7 +22,7 @@ const authenticateToken = async (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        return res.status(401).json({ message: "Token inválido" });
+        return res.status(401).json({ message: 'Token inválido' });
     }
 };
 

@@ -27,3 +27,4 @@ Asegurar consistencia de datos de usuario al que le ingresan los materiales, y l
 
 Casos de uso:
 Ingreso de materiales: Valida material y usuario ingresado, valor.
+
